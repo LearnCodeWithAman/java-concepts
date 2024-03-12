@@ -3,7 +3,9 @@ package collections;
 import entity.Address;
 import entity.Employee;
 
-public class ArrayList {
+import java.util.ArrayList;
+
+public class Array_List {
 
     public static void main(String[] args) {
 
@@ -16,7 +18,7 @@ public class ArrayList {
         Address address3 = new Address("Kaggadaspura", "Bangalore", "Karanataka", 560093);
         Employee e3 = new Employee(3, "Mohit", address3, 250000);
 
-        java.util.ArrayList<Employee> employeeList = new java.util.ArrayList<Employee>();
+        ArrayList<Employee> employeeList = new ArrayList<Employee>();
         employeeList.add(e1);
         employeeList.add(e2);
         employeeList.add(e3);
