@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Samosa implements Serializable, Cloneable{
 
+    //Lazy way of creating Singleton Object
     private static Samosa samosa;
 
     private Samosa() {
