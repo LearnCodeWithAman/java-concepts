@@ -1,6 +1,8 @@
 package streams;
 
-import entities.Employee;
+
+import entity.Address;
+import entity.Employee;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,10 +11,13 @@ public class EmployeeService {
 
     public static void main(String args[]) {
 
-        Employee e1 = new Employee(1, "Aman", "Bangalore", 120000);
-        Employee e2 = new Employee(2, "Kishan", "Khalilabad", 10000);
-        Employee e3 = new Employee(3, "Rohan", "Khalilabad", 70000);
-        Employee e4 = new Employee(4, "Karan", "Gorakhpur", 80000);
+        Address address1 = new Address(null, "Bangalore", "Karanataka", 560093);
+        Employee e1 = new Employee(1, "Aman", address1, 120000);
+        Address address2 = new Address(null, "Khalilabad", "UP", 272175);
+        Employee e2 = new Employee(2, "Kishan", address2, 10000);
+        Employee e3 = new Employee(3, "Rohan", address2, 70000);
+        Address address3 = new Address(null, "Gorakhpur", "UP", 273001);
+        Employee e4 = new Employee(4, "Karan", address3, 80000);
 
         List<Employee> employeeList = List.of(e1, e2, e3, e4);
 
