@@ -8,6 +8,12 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        Jalebi j1 = Jalebi.getJalebi();
+        System.out.println(j1.hashCode());
+
+        Jalebi j2 = Jalebi.getJalebi();
+        System.out.println(j2.hashCode());
+
         Samosa s1 = Samosa.getSamosa();
         System.out.println(s1.hashCode());
 
