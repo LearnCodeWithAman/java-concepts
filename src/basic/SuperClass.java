@@ -7,10 +7,10 @@ import java.io.IOException;
 abstract class SuperClass{
 
     public SuperClass(){
-    }
+    } 
 
     public void method1() throws Exception {
-        System.out.println("SuperClass");
+        System.out.println(" SuperClass");
     }
 
     public abstract void method2();
