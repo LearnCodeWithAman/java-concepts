@@ -14,6 +14,16 @@ public class Address {
         this.pincode = pincode;
     }
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "area='" + area + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", pincode=" + pincode +
+                '}';
+    }
+
     public String getArea() {
         return area;
     }
