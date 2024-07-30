@@ -1,8 +1,6 @@
 package streams;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamsPractiseQuestions {
@@ -18,7 +16,9 @@ public class StreamsPractiseQuestions {
 
 
         //2.Given a list of integers, WAP to find maximum element using Streams
-        int max= nums.stream().max(Comparator.naturalOrder()).get();
+        //int max= nums.stream().max(Comparator.naturalOrder()).get();
+        //Optional<Integer> max= nums.stream().max(Integer::compareTo);
+        int max = nums.stream().mapToInt(Integer::intValue).max().getAsInt();
         System.out.println("Max = " +max);
 
 
@@ -27,7 +27,7 @@ public class StreamsPractiseQuestions {
         System.out.println("Count of Fruits starting with 'c' = " +count);
 
 
-        //4. Convert a list of strings to uppercase
+        //4. Convert a list of strings t o uppercase
         List<String> fruit = fruits.stream().map(String::toUpperCase).toList();
         fruit.forEach(System.out::println);
 
@@ -59,5 +59,32 @@ public class StreamsPractiseQuestions {
         System.out.println("List is Even : " + isEven);
 
 
+        List<Integer> numList = List.of(1,2,3,4,5,6,7,8,9,10);
+
+        //10. WAP to print the square of even numbers
+        System.out.println("Print square of all even numbers");
+        numList.stream().filter(e->e%2==0).map(e->e*e).toList().forEach(System.out::println);
+
+        //11. WAP to print the square of even numbers
+        System.out.println("Print sum of square of all odd numbers");
+        int sumSquareOdd = numList.stream().filter(e->e%2!=0).map(e->e*e).mapToInt(Integer::intValue).sum();
+        System.out.println("SumSquareOdd : "+ sumSquareOdd);
+
+        //12. Find the words present in the string more than once along with their occurrences
+        String strSentence = " HI EPAM bYe EPAM goodbye EPAM welcome ePAM Hi There epAM BYE bye EPaM";
+        String[] strArray = strSentence.split(" ");
+        List<String> strList = Arrays.asList(strArray);
+        Map<String, Long> myMap = strList.stream().map(String::toLowerCase).collect(Collectors.groupingBy(e->e, Collectors.counting()));
+        myMap.forEach((key,value) -> System.out.println(key +", "+ value));
+
+
+        List<String> words = Arrays.asList("apple", "banana", "orange", "apple", "kiwi", "banana", "kiwi", "kiwi");
+
+        System.out.println("Counts the frequency of each word, and prints the word along with its count in descending order of frequency");
+        //13. counts the frequency of each word, and prints the word along with its count in descending order of frequency
+        Map<String, Long> wordMap = words.stream().collect(Collectors.groupingBy(e->e, Collectors.counting()));
+        wordMap.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .forEach(System.out::println);
     }
 }

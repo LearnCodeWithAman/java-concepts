@@ -12,7 +12,7 @@ public class DeadlockDemo {
                 System.out.println("Varsha has accquired harsha's key");
                 try {
                     System.out.println("Varsha sleeping for 3 mins");
-                    Thread.sleep(3000);
+                    Thread.sleep(300000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

@@ -8,9 +8,10 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 public class EmployeeService {
 
@@ -27,42 +28,62 @@ public class EmployeeService {
         Employee e6 = new Employee(6, "Deepshikha", 29, address1, 130000);
         Employee e7 = new Employee(7, "Mohit", 30, address1, 300000);
 
-
         List<Employee> employeeList = List.of(e1, e2, e3, e4, e5, e6, e7);
 
-        // Sort Employess by salary
+
+        //Sort Employess by salary
         List<String> sortedNames = employeeList.stream()
                 .sorted(Comparator.comparing(Employee::getSalary).reversed())
                 .map(Employee::getName).toList();
-        System.out.println("Employees List sorted by Salary :");
-        sortedNames.forEach(System.out::println);
+        //System.out.println("Employees List sorted by Salary :");
+        //sortedNames.forEach(System.out::println);
 
 
-        // Give count of employess according to their city
-        System.out.println();
-        System.out.println("Employee Count for each City :");
+        //Give count of employess according to their city
+        //System.out.println();
+        //System.out.println("Employee Count for each City :");
         Map<String, List<Employee>> employeeByCityMap = employeeList.stream()
                 .collect(groupingBy(e -> e.getAddress().getCity()));
         Map<String, Long> countByCityMap = employeeList.stream()
-                .collect(groupingBy(e -> e.getAddress().getCity(), Collectors.counting()));
+                .collect(groupingBy(e -> e.getAddress().getCity(), counting()));
 
-        countByCityMap.entrySet().forEach(System.out::println);
+        //countByCityMap.entrySet().forEach(System.out::println);
 
 
-        // Get Employees according to City and then Age
+        //Get Employees according to City and then Age
         System.out.println();
         System.out.println("Get Employees according to City and then Age :");
         Map<String, Map<Integer,List<Employee>>> employeeByCityThenByAgeMap = employeeList.stream()
                 .collect(groupingBy(e -> e.getAddress().getCity(), groupingBy(e -> e.getAge())));
 
-        employeeByCityThenByAgeMap.entrySet().forEach(e -> {
+        /*employeeByCityThenByAgeMap.entrySet().forEach(e -> {
             System.out.println();
             System.out.println("City === " + e.getKey());
             e.getValue().entrySet().forEach(em -> {
                 System.out.println("Age: " + em.getKey());
                 em.getValue().forEach(System.out::println);
             });
-        });
+        });*/
 
+
+        //Get highest salary employee based on city
+        Map<String, Employee> highestSalaryEmployeeByCity
+                = employeeList.stream().collect(groupingBy(e->e.getAddress().getCity(),
+                collectingAndThen(maxBy(Comparator.comparingLong(Employee::getSalary)),Optional::get)));
+
+        /*System.out.println("Highest salary employee based on city");
+        highestSalaryEmployeeByCity.entrySet().forEach( e ->
+                System.out.println(e.getKey() + " - " + e.getValue().getName())
+        );*/
+
+
+        //find the lowest salary employee city wise.
+
+        Map<String, Employee> lowestSalaryEmployeeByCity = employeeList.stream()
+                .collect(Collectors.groupingBy(e->e.getAddress().getCity(),
+                        collectingAndThen(minBy(Comparator.comparingLong(Employee::getSalary)), Optional::get)));
+        lowestSalaryEmployeeByCity.entrySet().forEach( e ->
+                System.out.println(e.getKey() + " - " + e.getValue().getName())
+        );
     }
 }
